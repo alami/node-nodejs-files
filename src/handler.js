@@ -19,7 +19,7 @@ function readConsoleInput(userdir) {
 
 export async function handler(userdir) {
     const input = await readConsoleInput(userdir);
-    console.log(`${userdir}>>`, input);
+    //console.log(`${userdir}>>`, input);
     return input
 }
 

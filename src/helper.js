@@ -1,11 +1,15 @@
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path from 'path';
 
 export const usersOSdir='c:\\Users\\'
+export const pathcomponents = path.parse(usersOSdir)
+//  { root: 'c:\\', dir: 'c:\\Users', base: 'User', ext: '', name: 'User' }
+export const OSdir='c:\\'
+
 
 export const getCurrentFolder = (path) => {
     const filename = fileURLToPath(path);
-    return dirname(filename);
+    return path.dirname(filename);
 }
 
 export const msgErrInput = 'Invalid input';

@@ -3,6 +3,7 @@ import {argv} from 'process';
 import {changeUserDir} from "./helperdir.js";
 import * as h from "./helper.js";
 import {handler} from "./handler.js";
+import {pathcomponents} from "./helper.js";
 
 let username=''
 let tmpdir = ''  //let userdir=''
@@ -29,7 +30,9 @@ if (parseArgs()) {
     var cmdargs = cmd.trim().split(' ');
     switch (cmdargs[0]) {
       case 'up':
-        tmpdir=path.resolve(tmpdir,'..')
+        if (pathcomponents.root != tmpdir)
+           tmpdir=path.resolve(tmpdir,'..')
+        else console.log('can\'t up')
         break
       case 'cd': break
       case 'q':
