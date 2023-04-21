@@ -4,7 +4,9 @@
   "description": "This repository node-nodejs-files https://github.com/alami/node-nodejs-files.git",
   "type": "module",
   "scripts": {
-    "start": "node src/start.js -- --username=alami"
+    "start": "node src/start.js -- --username=User",
+    "s1": "node src/handler.js",
+    "s2": "node src/helperdir.js "
   },
   "repository": {
     "type": "git",

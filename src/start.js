@@ -1,14 +1,18 @@
+import path from 'path'
 import {argv} from 'process';
 import {changeUserDir} from "./helperdir.js";
 import * as h from "./helper.js";
 import {handler} from "./handler.js";
+
+let username=''
+let tmpdir = ''  //let userdir=''
 const parseArgs = () => {
-  let username=''
   for (let i = 0; i < argv.length; i++) {
     if (argv[i].startsWith('--') && (argv[++i]).startsWith('--username')) {
       username = argv[i].substring(11)
       changeUserDir(username)
-      console.log(h.msgWelcome+username +'!')
+      tmpdir = h.usersOSdir+username //userdir = h.usersOSdir+username
+      console.log(`Welcome to the File Manager, ${username}!`)
       return true
     }
   }
@@ -20,9 +24,21 @@ const parseArgs = () => {
 
 if (parseArgs()) {
   let cmd = ''
-  while (true) {
-    cmd = await handler()
-    if (cmd == 'q') break
+  while (cmd != 'q') {
+    cmd = await handler(tmpdir)
+    var cmdargs = cmd.trim().split(' ');
+    switch (cmdargs[0]) {
+      case 'up':
+        tmpdir=path.resolve(tmpdir,'..')
+        break
+      case 'cd': break
+      case 'q':
+        console.log(`Welcome to the File Manager, ${username}!`)
+        process.exit()
+      default:
+        console.log(`${h.msgErrInput}: ${cmd}`)
+    }
+
   }
 }
 
