@@ -13,6 +13,9 @@ import remove from "./cmd/remove.js";
 import copy from "./cmd/copy.js";
 import {flags} from "./cmd/checkExist.js";
 import osswitch from "./cmd/osswitch.js";
+import hash from "./cmd/hash.js";
+import compress from "./cmd/compress.js";
+import decompress from "./cmd/decompress.js";
 
 export let username=''
 let tmpdir = os.homedir()
@@ -74,6 +77,15 @@ if (parseArgs()) {
         }else {
           console.log(`${h.msgErrArgs}\n${h.msgHelp}`)
         }
+        break
+      case 'hash':
+        await hash(cmdargs[1])
+        break
+      case 'compress':
+        await compress(cmdargs[1],cmdargs[2])
+        break
+      case 'decompress':
+        await decompress(cmdargs[1],cmdargs[2])
         break
       case 'q':
         console.log(`Thank you for using File Manager, ${username}, goodbye!\n`);
