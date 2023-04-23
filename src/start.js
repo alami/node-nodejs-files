@@ -12,6 +12,7 @@ import rename from "./cmd/rename.js";
 import remove from "./cmd/remove.js";
 import copy from "./cmd/copy.js";
 import {flags} from "./cmd/checkExist.js";
+import osswitch from "./cmd/osswitch.js";
 
 export let username=''
 let tmpdir = os.homedir()
@@ -69,13 +70,7 @@ if (parseArgs()) {
         break
       case 'os':
         if (cmdargs[1] && cmdargs[1].startsWith('--')) {
-            switch (cmdargs[1].substring(2)) {
-              case 'EOL':
-                console.log('EOL')
-                break
-              default:
-                console.log(`${h.msgErrArgs} of 'os'\n${h.msgHelp}`)
-          }
+          osswitch(cmdargs[1].substring(2))
         }else {
           console.log(`${h.msgErrArgs}\n${h.msgHelp}`)
         }
