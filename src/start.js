@@ -9,6 +9,7 @@ import cd from "./cmd/cd.js";
 import cat from "./cmd/cat.js";
 import add from "./cmd/add.js";
 import rename from "./cmd/rename.js";
+import remove from "./cmd/delete.js";
 
 let username=''
 let tmpdir = ''
@@ -54,6 +55,9 @@ if (parseArgs()) {
         break
       case 'rn':
         await rename(cmdargs[1],cmdargs[2])
+        break
+      case 'rm':
+        await remove(cmdargs[1])
         break
       case 'q':
         console.log(`Thank you for using File Manager goodbye!\n`);
