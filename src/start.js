@@ -13,14 +13,13 @@ import remove from "./cmd/remove.js";
 import copy from "./cmd/copy.js";
 import {flags} from "./cmd/checkExist.js";
 
-let username=''
-let tmpdir = ''
+export let username=''
+let tmpdir = os.homedir()
 const parseArgs = () => {
   for (let i = 0; i < process.argv.length; i++) {
     if (process.argv[i].startsWith('--') && (process.argv[++i]).startsWith('--username')) {
       username = process.argv[i].substring(11)
-      d.changeUserDir(username)
-      tmpdir = h.usersOSdir+username //userdir = h.usersOSdir+username
+      process.chdir(tmpdir)
       console.log(`Welcome to the File Manager, ${username}!\n`)
       return true
     }
@@ -68,8 +67,21 @@ if (parseArgs()) {
       case 'rm':
         await remove(cmdargs[1])
         break
+      case 'os':
+        if (cmdargs[1] && cmdargs[1].startsWith('--')) {
+            switch (cmdargs[1].substring(2)) {
+              case 'EOL':
+                console.log('EOL')
+                break
+              default:
+                console.log(`${h.msgErrArgs} of 'os'\n${h.msgHelp}`)
+          }
+        }else {
+          console.log(`${h.msgErrArgs}\n${h.msgHelp}`)
+        }
+        break
       case 'q':
-        console.log(`Thank you for using File Manager goodbye!\n`);
+        console.log(`Thank you for using File Manager, ${username}, goodbye!\n`);
         process.exit()
       case '?': case 'h': case 'help':
         console.log(h.helplist)

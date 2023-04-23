@@ -1,11 +1,12 @@
 import * as readline from 'node:readline'
+import {username} from './start.js'
 function readConsoleInput(userdir) {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
     rl.on('SIGINT', () => {
-        console.log(`Thank you for using File Manager goodbye!\n`);
+        console.log(`Thank you for using File Manager, ${username}, goodbye!\n`);
         process.exit();
     });
 
