@@ -6,6 +6,9 @@ import * as h from "./helper.js";
 import handler from "./handler.js";
 import list from "./cmd/list.js";
 import cd from "./cmd/cd.js";
+import cat from "./cmd/cat.js";
+import add from "./cmd/add.js";
+import rename from "./cmd/rename.js";
 
 let username=''
 let tmpdir = ''
@@ -42,11 +45,15 @@ if (parseArgs()) {
       case 'cd':
         cd(cmdargs[1])
         tmpdir = process.cwd()
-        /*if (cmdargs[1] == undefined) {
-          console.log(`cd :${h.msgErrArgs}\n${h.msgHelp}`)
-        }
-        else
-          console.log('cd:'+cmdargs[1])*/
+        break
+      case 'cat':
+        await add(cmdargs[1])
+        break
+      case 'add':
+        await add(cmdargs[1])
+        break
+      case 'rn':
+        await rename(cmdargs[1],cmdargs[2])
         break
       case 'q':
         console.log(`Thank you for using File Manager goodbye!\n`);
@@ -57,7 +64,6 @@ if (parseArgs()) {
       default:
         console.log(`${h.msgErrInput}: ${cmd}`)
     }
-
   }
 }
 
