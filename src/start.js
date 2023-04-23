@@ -9,7 +9,9 @@ import cd from "./cmd/cd.js";
 import cat from "./cmd/cat.js";
 import add from "./cmd/add.js";
 import rename from "./cmd/rename.js";
-import remove from "./cmd/delete.js";
+import remove from "./cmd/remove.js";
+import copy from "./cmd/copy.js";
+import {flags} from "./cmd/checkExist.js";
 
 let username=''
 let tmpdir = ''
@@ -55,6 +57,13 @@ if (parseArgs()) {
         break
       case 'rn':
         await rename(cmdargs[1],cmdargs[2])
+        break
+      case 'cp':
+        await copy(cmdargs[1],cmdargs[2])
+        break
+      case 'mv':
+        await copy(cmdargs[1],cmdargs[2])
+        await remove(cmdargs[1])
         break
       case 'rm':
         await remove(cmdargs[1])
